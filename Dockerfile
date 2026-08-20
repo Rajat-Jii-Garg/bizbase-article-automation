@@ -1,11 +1,10 @@
 FROM n8nio/n8n:latest
 
-# रेंडर को रूट परमिशन देना ताकि पाथ एरर न आए
 USER root
 
-# रेंडर के इंटरनल पोर्ट को सीधा 10000 असाइन करना
+# रेंडर के लिए पोर्ट 10000 फिक्स करना
 ENV N8N_PORT=10000
 EXPOSE 10000
 
-# पूरा फुल पाथ देकर नोड के साथ n8n को स्टार्ट करना
-CMD ["node", "/usr/local/lib/node_modules/n8n/bin/n8n", "start"]
+# n8n का अपना ऑफिशियल एंट्रीपॉइंट जो कल सक्सेसफुल चला था
+ENTRYPOINT ["tini", "--", "/docker-entrypoint.sh"]
